@@ -1,12 +1,18 @@
 import { useState } from 'react'
 import Question from './Question'
+import Confetti from 'react-confetti'
 
 const Quiz = ({ categoryName, questionData }) => {
   const [currentQ, setCurrentQ] = useState(0)
   const [correct, setCorrect] = useState(false)
 
   if (questionData && currentQ === questionData.length - 1) {
-    return <div className="endgame">No more Qs!</div>
+    return (
+      <div className="endgame">
+        <Confetti />
+        <h1>No more Qs!</h1>
+      </div>
+    )
   }
   const handleCorrect = () => {
     setCorrect(true)
