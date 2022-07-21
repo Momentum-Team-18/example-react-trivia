@@ -14,7 +14,7 @@ const Question = ({
 
   return (
     <div className="question card">
-      <p>{he.decode(question)}</p>
+      <p>{question}</p>
       <div className="answers">
         <ul className="collection">
           {answerChoices.map((choice, idx) => (

@@ -3,6 +3,7 @@ import axios from 'axios'
 import Quiz from './components/Quiz'
 import './App.css'
 import shuffle from 'lodash/shuffle'
+import he from 'he'
 
 function App() {
   const [categories, setCategories] = useState(null)
@@ -28,8 +29,8 @@ function App() {
           setSelectedCategoryName(res.data.results[0].category)
           setQuestionData(
             res.data.results.map((obj) => ({
-              question: obj.question,
-              correctAnswer: obj.correct_answer,
+              question: he.decode(obj.question),
+              correctAnswer: he.decode(obj.correct_answer),
               answerChoices: shuffle([
                 obj.correct_answer,
                 ...obj.incorrect_answers,
