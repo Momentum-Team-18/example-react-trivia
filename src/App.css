@@ -2,3 +2,7 @@
   cursor: pointer;
 }
 
+.result {
+  padding: 15px;
+  margin-bottom: 20px;
+}

@@ -25,7 +25,6 @@ function App() {
           `https://opentdb.com/api.php?amount=10&category=${selectedCategoryId}&type=multiple`
         )
         .then((res) => {
-          console.log(res.data)
           setSelectedCategoryName(res.data.results[0].category)
           setQuestionData(
             res.data.results.map((obj) => ({
@@ -48,8 +47,10 @@ function App() {
   if (selectedCategoryId) {
     return (
       <>
-        <button onClick={handleBack}>Back to categories</button>
-        <Quiz categoryName={selectedCategoryName} questionData={questionData} />
+        <button onClick={handleBack} className="btn-small">
+          Back to categories
+        </button>
+        <Quiz categoryName={selectedCategoryName} questionData={questionData} playAgain={handleBack} />
       </>
     )
   }
