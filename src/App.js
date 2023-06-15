@@ -50,26 +50,32 @@ function App() {
         <button onClick={handleBack} className="btn-small">
           Back to categories
         </button>
-        <Quiz categoryName={selectedCategoryName} questionData={questionData} playAgain={handleBack} />
+        <Quiz
+          categoryName={selectedCategoryName}
+          questionData={questionData}
+          playAgain={handleBack}
+        />
       </>
     )
   }
 
   return (
-    <section className="category-list container">
+    <>
       <h1>Trivia Categories</h1>
-      {categories &&
-        categories.map((category) => (
-          <div
-            className="category"
-            id={category.id}
-            key={category.id}
-            onClick={() => setSelectedCategoryId(category.id)}
-          >
-            {category.name}
-          </div>
-        ))}
-    </section>
+      <section className="category-list container">
+        {categories &&
+          categories.map((category) => (
+            <div
+              className="category"
+              id={category.id}
+              key={category.id}
+              onClick={() => setSelectedCategoryId(category.id)}
+            >
+              {category.name}
+            </div>
+          ))}
+      </section>
+    </>
   )
 }
 

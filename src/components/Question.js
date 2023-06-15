@@ -1,7 +1,14 @@
 import he from 'he'
 
-const Question = ({ question, answerChoices, correctAnswer, handleAnswer }) => {
+const Question = ({
+  question,
+  answerChoices,
+  correctAnswer,
+  handleAnswer,
+  answered,
+}) => {
   const selectAnswer = (e) => {
+    if (answered) return
     handleAnswer(e.target.innerText === correctAnswer)
   }
 

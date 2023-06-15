@@ -3,8 +3,9 @@ import Question from './Question'
 import Confetti from 'react-confetti'
 import Result from './Result'
 
-const Quiz = ({ categoryName, questionData, playAgain}) => {
+const Quiz = ({ categoryName, questionData, playAgain }) => {
   const [currentQ, setCurrentQ] = useState(0)
+  const [currentQAnswered, setCurrentQAnswered] = useState(false)
   const [currentResponse, setCurrentResponse] = useState(null)
   const [score, setScore] = useState(0)
 
@@ -16,9 +17,16 @@ const Quiz = ({ categoryName, questionData, playAgain}) => {
       >
         <Confetti />
         <h1>No more Qs!</h1>
-        <p>You got {score} out of {questionData.length} questions right.</p>
+        <p>
+          You got {score} out of {questionData.length} questions right.
+        </p>
         <div>
-          <button className="waves-effect waves-teal btn-flat" onClick={playAgain}>Play again</button>
+          <button
+            className="waves-effect waves-teal btn-flat"
+            onClick={playAgain}
+          >
+            Play again
+          </button>
         </div>
       </div>
     )
@@ -26,14 +34,15 @@ const Quiz = ({ categoryName, questionData, playAgain}) => {
   const handleAnswer = (answer) => {
     if (answer) {
       setScore(score + 1)
-
     }
     setCurrentResponse(answer)
+    setCurrentQAnswered(true)
   }
 
   const handleNext = () => {
     setCurrentResponse(null)
     setCurrentQ(currentQ + 1)
+    setCurrentQAnswered(false)
   }
 
   return (
@@ -45,12 +54,14 @@ const Quiz = ({ categoryName, questionData, playAgain}) => {
           answerChoices={questionData[currentQ].answerChoices}
           correctAnswer={questionData[currentQ].correctAnswer}
           handleAnswer={handleAnswer}
+          answered={currentQAnswered}
         />
       )}
       {currentResponse !== null && <Result outcome={currentResponse} />}
       <button
         className="next waves-effect waves-light btn-large"
         onClick={handleNext}
+        disabled={!currentQAnswered}
       >
         Next
       </button>
