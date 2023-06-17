@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Question from './Question'
-import Confetti from 'react-confetti'
 import Result from './Result'
+import Endgame from './Endgame'
 
 const Quiz = ({ categoryName, questionData, playAgain }) => {
   const [currentQ, setCurrentQ] = useState(0)
@@ -11,26 +11,14 @@ const Quiz = ({ categoryName, questionData, playAgain }) => {
 
   if (questionData && currentQ === questionData.length - 1) {
     return (
-      <div
-        className="endgame"
-        style={{ display: 'grid', 'place-content': 'center', height: '100vh' }}
-      >
-        <Confetti />
-        <h1>No more Qs!</h1>
-        <p>
-          You got {score} out of {questionData.length} questions right.
-        </p>
-        <div>
-          <button
-            className="waves-effect waves-teal btn-flat"
-            onClick={playAgain}
-          >
-            Play again
-          </button>
-        </div>
-      </div>
+      <Endgame
+        score={score}
+        numberOfQuestions={questionData.length}
+        playAgain={playAgain}
+      />
     )
   }
+
   const handleAnswer = (answer) => {
     if (answer) {
       setScore(score + 1)
