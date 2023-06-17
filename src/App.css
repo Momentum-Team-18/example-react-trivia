@@ -26,3 +26,8 @@ h1 {
   place-content: 'center';
   height: '100vh';
 }
+
+.skeleton-item {
+  padding: 10px 0;
+  margin: 10px;
+}

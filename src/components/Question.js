@@ -1,4 +1,6 @@
 import he from 'he'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Question = ({
   question,
@@ -22,7 +24,9 @@ const Question = ({
               <li className="collection-item" onClick={selectAnswer} key={idx}>
                 {he.decode(choice)}
               </li>
-            ))}
+            )) || (
+              <Skeleton count={4} className="collection-item" width={'80%'} />
+            )}
           </ul>
         </div>
       </div>

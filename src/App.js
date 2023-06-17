@@ -4,17 +4,22 @@ import Quiz from './components/Quiz'
 import './App.css'
 import shuffle from 'lodash/shuffle'
 import he from 'he'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   const [categories, setCategories] = useState(null)
   const [selectedCategoryId, setSelectedCategoryId] = useState(null)
   const [selectedCategoryName, setSelectedCategoryName] = useState('')
   const [questionData, setQuestionData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    console.log('First useEffect, requesting categories')
     const triviaCategoryListURL = 'https://opentdb.com/api_category.php'
     axios.get(triviaCategoryListURL).then((res) => {
       setCategories(res.data.trivia_categories)
+      setLoading(false)
     })
   }, [])
 
@@ -59,6 +64,23 @@ function App() {
     )
   }
 
+  console.log('Conditional render of loading component')
+  if (loading) {
+    //https://github.com/dvtng/react-loading-skeleton
+    return (
+      <>
+        <h1>Trivia Categories</h1>
+        <Skeleton
+          count={24}
+          className="skeleton-item"
+          containerClassName="category-list"
+          width={'80%'}
+        />
+      </>
+    )
+  }
+
+  console.log('about to return the JSX for the category list')
   return (
     <>
       <h1>Trivia Categories</h1>
